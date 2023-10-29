@@ -89,18 +89,35 @@ var upperCasedCharacters = [
 ];
 
 // Function to prompt user for password options
-function getPasswordOptions() {
 
-}
+function getPasswordOptions() {
+  var passwordLength = parseInt(prompt("Please type a number between 8 - 128 to specificy password length"))
+  var lowercase =confirm("If you want any lower case letters in your password")
+  var uppercase = confirm("If you want any upper case letters in your password")
+  var numeric = confirm("If you want any numeric numbers in your password")
+  var specialCharacters = confirm("If you want any special characters in your password")
+  return [passwordLength, lowercase, uppercase, numeric, specialCharacters]
+  }
+
+var [getPasswordLength, getLowercase, getUppercase, getNumeric, getSpecialCharacters] = getPasswordOptions()
 
 // Function for getting a random element from an array
 function getRandom(arr) {
-
+//to get a random number
+var randomElement = Math.floor(Math.random()*arr.length);
+return arr[randomElement];
 }
 
 // Function to generate password with user input
 function generatePassword() {
+// for a user input passwordlength, check if each statement is true or false, then take in random characters from each array and put them together.
+//for a password length of 8
+//take in random characters from lowercase but no more than passwordLength/4 make it whole number
+//take in random characters from uppercase but no more than passwordLength/4 make it whole number
+//same but for special character
+//all reamining values are made up from the numeric numbers
 
+//chatGpt offered a better solution.... add all character arrays together, then use the function to get a bunch of random element, the iterate it by the password length.
 }
 
 // Get references to the #generate element
@@ -116,3 +133,9 @@ function writePassword() {
 
 // Add event listener to generate button
 generateBtn.addEventListener('click', writePassword);
+
+var test1 = getRandom(getPasswordOptions())
+console.log(test1)
+
+console.log(getPasswordLength)
+console.log(getLowercase)
