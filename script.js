@@ -92,14 +92,20 @@ var upperCasedCharacters = [
 
 function getPasswordOptions() {
   var passwordLength = parseInt(prompt("Please type a number between 8 - 128 to specificy password length"))
+  if (passwordLength < 8) {
+    return alert("password length too short")
+  } else if (passwordLength > 128) {
+    return alert("password length is too long")
+  }
+  else {
   var lowercase =confirm("If you want any lower case letters in your password")
   var uppercase = confirm("If you want any upper case letters in your password")
   var numeric = confirm("If you want any numeric numbers in your password")
   var specialCharacters = confirm("If you want any special characters in your password")
   return [passwordLength, lowercase, uppercase, numeric, specialCharacters]
-  }
+  }}
 
-var [getPasswordLength, getLowercase, getUppercase, getNumeric, getSpecialCharacters] = getPasswordOptions()
+
 
 // Function for getting a random element from an array
 function getRandom(arr) {
@@ -110,6 +116,12 @@ return arr[randomElement];
 
 // Function to generate password with user input
 function generatePassword() {
+  var options = getPasswordOptions();
+  var getPasswordLength = options[0];
+  var getLowercase = options[1];
+  var getUppercase = options[2];
+  var getNumeric = options[3];
+  var getSpecialCharacters = options[4];
 // for a user input passwordlength, check if each statement is true or false, then take in random characters from each array and put them together.
 //for a password length of 8
 //take in random characters from lowercase but no more than passwordLength/4 make it whole number
@@ -117,8 +129,36 @@ function generatePassword() {
 //same but for special character
 //all reamining values are made up from the numeric numbers
 
-//chatGpt offered a better solution.... add all character arrays together, then use the function to get a bunch of random element, the iterate it by the password length.
+//create an empty blank password combination to store all the arrays. 
+var passwordCombination = "";
+if (getLowercase) {
+  passwordCombination += lowerCasedCharacters
 }
+if (getUppercase) {
+  passwordCombination += upperCasedCharacters
+}
+if (getNumeric) {
+  passwordCombination += numericCharacters
+}
+
+if(getSpecialCharacters) {
+  passwordCombination += specialCharacters
+}
+
+//create a blank password to store 
+
+  var password = "" 
+
+//write a for statement to iterate the password
+
+for(i = 0; i < getPasswordLength; i++){
+  password += getRandom(passwordCombination)
+}
+  
+return password 
+}
+
+
 
 // Get references to the #generate element
 var generateBtn = document.querySelector('#generate');
@@ -134,8 +174,4 @@ function writePassword() {
 // Add event listener to generate button
 generateBtn.addEventListener('click', writePassword);
 
-var test1 = getRandom(getPasswordOptions())
-console.log(test1)
 
-console.log(getPasswordLength)
-console.log(getLowercase)
