@@ -130,21 +130,23 @@ function generatePassword() {
 //all reamining values are made up from the numeric numbers
 
 //create an empty blank password combination to store all the arrays. 
-var passwordCombination = "";
+//ensure the passwordCombination is put together in an array
+var passwordCombination = [];
+
 if (getLowercase) {
-  passwordCombination += lowerCasedCharacters
-}
+  passwordCombination = passwordCombination.concat(lowerCasedCharacters);
+} 
 if (getUppercase) {
-  passwordCombination += upperCasedCharacters
+  passwordCombination = passwordCombination.concat(upperCasedCharacters);
 }
 if (getNumeric) {
-  passwordCombination += numericCharacters
+  passwordCombination = passwordCombination.concat(numericCharacters);
+}
+if (getSpecialCharacters) {
+  passwordCombination = passwordCombination.concat(specialCharacters);
 }
 
-if(getSpecialCharacters) {
-  passwordCombination += specialCharacters
-}
-
+passwordCombination = passwordCombination.join('');
 //create a blank password to store 
 
   var password = "" 
